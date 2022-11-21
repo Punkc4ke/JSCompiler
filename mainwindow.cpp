@@ -1,15 +1,17 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-// Нам понадобяться следующие классы
-//#include <QScriptEngine>
 #include <QJSEngine>
 #include <QScriptContext>
 #include <QScriptValue>
 #include <QDebug>
 #include <QFile>
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
+#include "js_object.h"
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     connect(ui->execPushButton, &QPushButton::clicked, this, &MainWindow::on_execPushButton_clicked);
@@ -24,9 +26,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_execPushButton_clicked()
 {
+    Factory *factory = new Factory;
+    QJSValue jsFactory = engine.newQObject(factory);
+    engine.globalObject().setProperty("operator", jsFactory);
+    QJSValue v = engine.evaluate("var t = operator.foo(); t.plus(10, 10);");
+
     QString scriptCode = ui->javaScriptTextEdit->toPlainText();
     QJSValue result = engine.evaluate(scriptCode);
     ui->resultTextEdit->setPlainText(result.toString());
+
 
 //    if(engine.thr() == true){
 //    QString errPattern = ("line %1: %2");
@@ -57,10 +65,14 @@ void MainWindow::on_openButton_clicked()
 
 void MainWindow::on_saveButton_clicked()
 {
+     QString  scriptCode = ui->javaScriptTextEdit->toPlainText();
      QString str;
      str = ui->label->text();
 
      QFile file(str);
+     if (scriptCode.isNull()){
+         return;
+     }
      if (str.isNull()){
          return;
      }
@@ -76,8 +88,13 @@ void MainWindow::on_saveButton_clicked()
 
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_saveResultButton_clicked()
 {
+//    QString result = ui->resultTextEdit->toPlainText();
+//    if (result.isNull() == true){
+//        return;
+//    }
+//    else {
     QFile file("/home/alexey/Рабочий стол/Резултаты.txt");
 
     file.open(QIODevice::WriteOnly);
@@ -87,4 +104,5 @@ void MainWindow::on_pushButton_clicked()
     file.write(text1);
 
     file.close();
+
 }

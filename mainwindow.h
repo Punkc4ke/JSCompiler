@@ -30,7 +30,7 @@ private slots:
 
     void on_saveButton_clicked();
 
-    void on_pushButton_clicked();
+    void on_saveResultButton_clicked();
 
 private:
     Ui::MainWindow *ui;

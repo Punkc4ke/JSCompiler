@@ -22,7 +22,9 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
-    mainwindow.h
+    js_object.h \
+    mainwindow.h \
+    test.h
 
 FORMS += \
     mainwindow.ui
