@@ -32,10 +32,12 @@ private slots:
 
     void on_saveResultButton_clicked();
 
+    void on_saveHowButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QJSEngine engine;
-    QFileSystemModel *model;
+    QScriptEngine scriptEngine;
 };
 
 #endif // MAINWINDOW_H

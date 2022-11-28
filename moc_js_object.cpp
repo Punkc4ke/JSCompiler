@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Js_Object_t {
-    QByteArrayData data[5];
-    char stringdata0[20];
+    QByteArrayData data[4];
+    char stringdata0[18];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,11 +34,10 @@ static const qt_meta_stringdata_Js_Object_t qt_meta_stringdata_Js_Object = {
 QT_MOC_LITERAL(0, 0, 9), // "Js_Object"
 QT_MOC_LITERAL(1, 10, 4), // "plus"
 QT_MOC_LITERAL(2, 15, 0), // ""
-QT_MOC_LITERAL(3, 16, 1), // "a"
-QT_MOC_LITERAL(4, 18, 1) // "b"
+QT_MOC_LITERAL(3, 16, 1) // "a"
 
     },
-    "Js_Object\0plus\0\0a\0b"
+    "Js_Object\0plus\0\0a"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,10 +55,10 @@ static const uint qt_meta_data_Js_Object[] = {
        0,       // signalCount
 
  // methods: name, argc, parameters, tag, flags
-       1,    2,   19,    2, 0x02 /* Public */,
+       1,    1,   19,    2, 0x02 /* Public */,
 
  // methods: parameters
-    QMetaType::Int, QMetaType::Int, QMetaType::Int,    3,    4,
+    QMetaType::QString, QMetaType::QString,    3,
 
        0        // eod
 };
@@ -70,8 +69,8 @@ void Js_Object::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         auto *_t = static_cast<Js_Object *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: { int _r = _t->plus((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
-            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
+        case 0: { QString _r = _t->plus((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     }

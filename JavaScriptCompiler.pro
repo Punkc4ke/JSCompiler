@@ -23,8 +23,7 @@ SOURCES += \
 
 HEADERS += \
     js_object.h \
-    mainwindow.h \
-    test.h
+    mainwindow.h
 
 FORMS += \
     mainwindow.ui

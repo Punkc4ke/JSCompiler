@@ -6,6 +6,7 @@
 #include <QScriptValue>
 #include <QDebug>
 #include <QFile>
+#include <QCryptographicHash>
 
 #include "js_object.h"
 
@@ -29,27 +30,30 @@ void MainWindow::on_execPushButton_clicked()
     Factory *factory = new Factory;
     QJSValue jsFactory = engine.newQObject(factory);
     engine.globalObject().setProperty("operator", jsFactory);
-    QJSValue v = engine.evaluate("var t = operator.foo(); t.plus(10, 10);");
+
+// var t = operator.foo(); t.plus("/home/alexey/Рабочий стол/Результаты.txt");
 
     QString scriptCode = ui->javaScriptTextEdit->toPlainText();
     QJSValue result = engine.evaluate(scriptCode);
     ui->resultTextEdit->setPlainText(result.toString());
 
-
-//    if(engine.thr() == true){
-//    QString errPattern = ("line %1: %2");
-//    result = errPattern.arg(QString::number(engine.uncaughtExceptionLineNumber()), engine.uncaughtException().toString());
-//    return;
-//    }
+//       if (engine.hasUncaughtException()){
+//           QString errPattern = "line %1: %2";
+//           qDebug()<<errPattern.arg(QString::number(scriptEngine.uncaughtExceptionLineNumber()), scriptEngine.uncaughtException().toString());
+//           return;
+//       }
 }
 
 
 void MainWindow::on_openButton_clicked()
 {
     QString str;
-    str = QFileDialog::getOpenFileName(this, "Выберите файл", "/home/alexey/Рабочий стол" , "All Files (*.*);; JS Script (*.js)");
+    str = QFileDialog::getOpenFileName(this, "Выберите скрипт", "/home/alexey/Рабочий стол" , "All Files (*.*);; JS Script (*.js)");
     ui->label->setText(str);
-
+    if (str.isEmpty()){
+        return;
+    }
+    else {
     QFile file(str);
 
     file.open(QIODevice::ReadWrite|QIODevice::Text);
@@ -57,10 +61,10 @@ void MainWindow::on_openButton_clicked()
     file.seek(0);
     QByteArray text = file.readAll();
 
-   ui->javaScriptTextEdit->setPlainText(text);
+    ui->javaScriptTextEdit->setPlainText(text);
 
-   file.close();
-
+    file.close();
+    }
 }
 
 void MainWindow::on_saveButton_clicked()
@@ -70,6 +74,11 @@ void MainWindow::on_saveButton_clicked()
      str = ui->label->text();
 
      QFile file(str);
+     if(file.exists()==false){
+         str = "";
+         ui->label->setText(str);
+         return;
+     }
      if (scriptCode.isNull()){
          return;
      }
@@ -84,7 +93,7 @@ void MainWindow::on_saveButton_clicked()
      QByteArray text1 = text.toUtf8();
      file.write(text1);
 
-    file.close();
+     file.close();
 
 }
 
@@ -95,7 +104,7 @@ void MainWindow::on_saveResultButton_clicked()
 //        return;
 //    }
 //    else {
-    QFile file("/home/alexey/Рабочий стол/Резултаты.txt");
+    QFile file("/home/alexey/Рабочий стол/Результаты.txt");
 
     file.open(QIODevice::WriteOnly);
 
@@ -105,4 +114,28 @@ void MainWindow::on_saveResultButton_clicked()
 
     file.close();
 
+}
+
+
+void MainWindow::on_saveHowButton_clicked()
+{
+
+
+    QString fileName = QFileDialog::getSaveFileName(this, "Сохранить как", "/home/alexey/Рабочий стол", "All Files (*.*);; JS Script (*.js)");
+    if (fileName.isEmpty()){
+        return;
+    }
+    else {
+        QFile file(fileName);
+        file.open(QIODevice::WriteOnly);
+
+       QString text = ui->javaScriptTextEdit->toPlainText();
+       QByteArray text1 = text.toUtf8();
+             file.write(text1);
+
+       file.close();
+
+       ui->label->setText(fileName);
+
+    }
 }

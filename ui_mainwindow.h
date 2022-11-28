@@ -33,6 +33,7 @@ public:
     QLabel *label;
     QPushButton *saveResultButton;
     QLabel *label_2;
+    QPushButton *saveHowButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -57,16 +58,19 @@ public:
         openButton->setGeometry(QRect(10, 10, 89, 25));
         saveButton = new QPushButton(centralwidget);
         saveButton->setObjectName(QString::fromUtf8("saveButton"));
-        saveButton->setGeometry(QRect(110, 10, 89, 25));
+        saveButton->setGeometry(QRect(240, 10, 171, 25));
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(10, 50, 771, 17));
         saveResultButton = new QPushButton(centralwidget);
         saveResultButton->setObjectName(QString::fromUtf8("saveResultButton"));
-        saveResultButton->setGeometry(QRect(210, 10, 161, 25));
+        saveResultButton->setGeometry(QRect(420, 10, 161, 25));
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(10, 360, 81, 17));
+        saveHowButton = new QPushButton(centralwidget);
+        saveHowButton->setObjectName(QString::fromUtf8("saveHowButton"));
+        saveHowButton->setGeometry(QRect(110, 10, 121, 25));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -86,10 +90,11 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
         execPushButton->setText(QApplication::translate("MainWindow", "\320\222\321\213\320\277\320\276\320\273\320\275\320\270\321\202\321\214", nullptr));
         openButton->setText(QApplication::translate("MainWindow", "\320\236\321\202\320\272\321\200\321\213\321\202\321\214", nullptr));
-        saveButton->setText(QApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", nullptr));
+        saveButton->setText(QApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214 \320\270\320\267\320\274\320\265\320\275\320\265\320\275\320\270\321\217", nullptr));
         label->setText(QString());
         saveResultButton->setText(QApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214 \321\200\320\265\320\267\321\203\320\273\321\214\321\202\320\260\321\202", nullptr));
         label_2->setText(QApplication::translate("MainWindow", "\320\240\320\265\320\267\321\203\320\273\321\214\321\202\320\260\321\202:", nullptr));
+        saveHowButton->setText(QApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214 \320\272\320\260\320\272", nullptr));
     } // retranslateUi
 
 };
