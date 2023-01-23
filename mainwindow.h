@@ -2,13 +2,16 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QScriptEngine>
 #include <QJSEngine>
 #include <QDir>
 #include <QFileSystemModel>
 #include <QFileDialog>
-
-
+#include <QtGui>
+#include <Qsci/qsciscintilla.h>
+#include <Qsci/qscilexer.h>
+#include <Qsci/qscilexercustom.h>
+#include <Qsci/qscistyle.h>
+#include <Qsci/qscistyledtext.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -37,7 +40,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QJSEngine engine;
-    QScriptEngine scriptEngine;
 };
 
 #endif // MAINWINDOW_H

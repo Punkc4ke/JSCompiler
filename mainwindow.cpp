@@ -7,8 +7,17 @@
 #include <QDebug>
 #include <QFile>
 #include <QCryptographicHash>
+#include <QtGui>
+#include <QColor>
 
-#include "js_object.h"
+#include <Qsci/qsciscintilla.h>
+#include <Qsci/qscilexerjavascript.h>
+#include <Qsci/qscilexer.h>
+#include <Qsci/qscilexercustom.h>
+#include <Qsci/qscistyle.h>
+#include <Qsci/qscistyledtext.h>
+
+#include <js_object.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -17,13 +26,45 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->execPushButton, &QPushButton::clicked, this, &MainWindow::on_execPushButton_clicked);
     connect(ui->saveButton, &QPushButton::clicked, this, &MainWindow::on_saveButton_clicked);
+
+    ui->textEdit1->setUtf8(true);// мы же хотим читать кириллицу
+    QsciLexerJavaScript * lexJS = new QsciLexerJavaScript(this);// создаем лексер (схему подсветки)
+    ui->textEdit1->setLexer(lexJS); // задаем С++ лексер нашему редактору
+
+
+    //! Текущая строка кода и ее подсветка
+    ui->textEdit1->setCaretLineVisible(true);
+    ui->textEdit1->setCaretLineBackgroundColor(QColor("gainsboro"));
+
+    //! Выравнивание
+    ui->textEdit1->setAutoIndent(true);
+    ui->textEdit1->setIndentationGuides(false);
+    ui->textEdit1->setIndentationsUseTabs(true);
+    ui->textEdit1->setIndentationWidth(4);
+
+    //! margin это полоска слева, на которой обычно распологаются breakpoints
+    ui->textEdit1->setMarginsBackgroundColor(QColor("gainsboro"));
+    ui->textEdit1->setMarginLineNumbers(1, true);
+    ui->textEdit1->setMarginWidth(1, 25);
+
+    //! Авто-дополнение кода в зависимости от источника
+    ui->textEdit1->setAutoCompletionSource(QsciScintilla::AcsAll);
+    ui->textEdit1->setAutoCompletionCaseSensitivity(true);
+    ui->textEdit1->setAutoCompletionReplaceWord(true);
+    ui->textEdit1->setAutoCompletionUseSingle(QsciScintilla::AcusAlways);
+    ui->textEdit1->setAutoCompletionThreshold(0);
+
+    //! Подсветка соответствий скобок
+    ui->textEdit1->setBraceMatching(QsciScintilla::SloppyBraceMatch);
+    ui->textEdit1->setMatchedBraceBackgroundColor(Qt::green);
+    ui->textEdit1->setUnmatchedBraceForegroundColor(Qt::blue);
+
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+        delete ui;
 }
-
 
 void MainWindow::on_execPushButton_clicked()
 {
@@ -33,17 +74,11 @@ void MainWindow::on_execPushButton_clicked()
 
 // var t = operator.foo(); t.plus("/home/alexey/Рабочий стол/Результаты.txt");
 
-    QString scriptCode = ui->javaScriptTextEdit->toPlainText();
+    QString scriptCode = ui->textEdit1->text();
     QJSValue result = engine.evaluate(scriptCode);
     ui->resultTextEdit->setPlainText(result.toString());
 
-//       if (engine.hasUncaughtException()){
-//           QString errPattern = "line %1: %2";
-//           qDebug()<<errPattern.arg(QString::number(scriptEngine.uncaughtExceptionLineNumber()), scriptEngine.uncaughtException().toString());
-//           return;
-//       }
 }
-
 
 void MainWindow::on_openButton_clicked()
 {
@@ -53,23 +88,24 @@ void MainWindow::on_openButton_clicked()
     if (str.isEmpty()){
         return;
     }
-    else {
-    QFile file(str);
+    else
+    {
+        QFile file(str);
 
-    file.open(QIODevice::ReadWrite|QIODevice::Text);
+        file.open(QIODevice::ReadWrite|QIODevice::Text);
 
-    file.seek(0);
-    QByteArray text = file.readAll();
+        file.seek(0);
+        QByteArray text = file.readAll();
 
-    ui->javaScriptTextEdit->setPlainText(text);
+        ui->textEdit1->setText(text);
 
-    file.close();
+        file.close();
     }
 }
 
 void MainWindow::on_saveButton_clicked()
 {
-     QString  scriptCode = ui->javaScriptTextEdit->toPlainText();
+     QString  scriptCode = ui->textEdit1->text();
      QString str;
      str = ui->label->text();
 
@@ -89,7 +125,7 @@ void MainWindow::on_saveButton_clicked()
      file.open(QIODevice::ReadWrite|QIODevice::Text);
 
      file.seek(0);
-     QString text = ui->javaScriptTextEdit->toPlainText();
+     QString text = ui->textEdit1->text();
      QByteArray text1 = text.toUtf8();
      file.write(text1);
 
@@ -99,11 +135,7 @@ void MainWindow::on_saveButton_clicked()
 
 void MainWindow::on_saveResultButton_clicked()
 {
-//    QString result = ui->resultTextEdit->toPlainText();
-//    if (result.isNull() == true){
-//        return;
-//    }
-//    else {
+
     QFile file("/home/alexey/Рабочий стол/Результаты.txt");
 
     file.open(QIODevice::WriteOnly);
@@ -116,10 +148,8 @@ void MainWindow::on_saveResultButton_clicked()
 
 }
 
-
 void MainWindow::on_saveHowButton_clicked()
 {
-
 
     QString fileName = QFileDialog::getSaveFileName(this, "Сохранить как", "/home/alexey/Рабочий стол", "All Files (*.*);; JS Script (*.js)");
     if (fileName.isEmpty()){
@@ -129,7 +159,7 @@ void MainWindow::on_saveHowButton_clicked()
         QFile file(fileName);
         file.open(QIODevice::WriteOnly);
 
-       QString text = ui->javaScriptTextEdit->toPlainText();
+       QString text = ui->textEdit1->text();
        QByteArray text1 = text.toUtf8();
              file.write(text1);
 
@@ -138,4 +168,38 @@ void MainWindow::on_saveHowButton_clicked()
        ui->label->setText(fileName);
 
     }
+}
+
+QString QsciLexerJavaScript::description(int style) const
+{
+    switch(style) {
+        case Default:
+            return "Default";
+        case Comment:
+            return "Comment";
+        case Keyword:
+            return "Keyword";
+        case Number:
+            return "Number";
+    }
+    return QString(style);
+}
+
+QColor QsciLexerJavaScript::defaultColor(int style) const
+{
+    switch(style) {
+        case Comment:
+            return Qt::green;
+        case Keyword:
+            return QColor(128, 166, 255);
+         case Number:
+            return QColor(128, 0, 128);
+         case Operator:
+            return QColor(224, 207, 177);
+        case DoubleQuotedString:
+           return QColor(119, 221, 119);
+
+
+    }
+    return Qt::black;
 }

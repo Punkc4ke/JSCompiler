@@ -34,3 +34,13 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES +=
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../QScintilla_src-2.13.3/src/release/ -lqscintilla2_qt5
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../QScintilla_src-2.13.3/src/debug/ -lqscintilla2_qt5
+else:unix: LIBS += -L$$PWD/../QScintilla_src-2.13.3/src/ -lqscintilla2_qt5
+
+INCLUDEPATH += $$PWD/../QScintilla_src-2.13.3/src
+DEPENDPATH += $$PWD/../QScintilla_src-2.13.3/src
+
+LIBS += -lqscintilla2_qt5

@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SCRIPT_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtScript -isystem /usr/include/x86_64-linux-gnu/qt5/QtQml -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
+INCPATH       = -I. -I../QScintilla_src-2.13.3/src -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtScript -isystem /usr/include/x86_64-linux-gnu/qt5/QtQml -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = JavaScriptCompiler1.0.0
 DISTDIR = /home/alexey/QtProjects/JavaScriptCompiler/.tmp/JavaScriptCompiler1.0.0
 LINK          = g++
 LFLAGS        = 
-LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Script.so /usr/lib/x86_64-linux-gnu/libQt5Qml.so /usr/lib/x86_64-linux-gnu/libQt5Network.so /usr/lib/x86_64-linux-gnu/libQt5Core.so /usr/lib/x86_64-linux-gnu/libGL.so -lpthread   
+LIBS          = $(SUBLIBS) -L/home/alexey/QtProjects/JavaScriptCompiler/../QScintilla_src-2.13.3/src/ -lqscintilla2_qt5 /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Script.so /usr/lib/x86_64-linux-gnu/libQt5Qml.so /usr/lib/x86_64-linux-gnu/libQt5Network.so /usr/lib/x86_64-linux-gnu/libQt5Core.so /usr/lib/x86_64-linux-gnu/libGL.so -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -392,12 +392,21 @@ compiler_moc_header_clean:
 moc_js_object.cpp: js_object.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/alexey/QtProjects/JavaScriptCompiler/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/alexey/QtProjects/JavaScriptCompiler -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtScript -I/usr/include/x86_64-linux-gnu/qt5/QtQml -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include js_object.h -o moc_js_object.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/alexey/QtProjects/JavaScriptCompiler/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/alexey/QtProjects/JavaScriptCompiler -I/home/alexey/QtProjects/QScintilla_src-2.13.3/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtScript -I/usr/include/x86_64-linux-gnu/qt5/QtQml -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include js_object.h -o moc_js_object.cpp
 
 moc_mainwindow.cpp: mainwindow.h \
+		../QScintilla_src-2.13.3/src/Qsci/qsciscintilla.h \
+		../QScintilla_src-2.13.3/src/Qsci/qsciglobal.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscicommand.h \
+		../QScintilla_src-2.13.3/src/Qsci/qsciscintillabase.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscidocument.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscilexer.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscilexercustom.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscistyle.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscistyledtext.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/alexey/QtProjects/JavaScriptCompiler/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/alexey/QtProjects/JavaScriptCompiler -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtScript -I/usr/include/x86_64-linux-gnu/qt5/QtQml -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/alexey/QtProjects/JavaScriptCompiler/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/alexey/QtProjects/JavaScriptCompiler -I/home/alexey/QtProjects/QScintilla_src-2.13.3/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtScript -I/usr/include/x86_64-linux-gnu/qt5/QtQml -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -407,7 +416,12 @@ compiler_uic_make_all: ui_mainwindow.h
 compiler_uic_clean:
 	-$(DEL_FILE) ui_mainwindow.h
 ui_mainwindow.h: mainwindow.ui \
-		/usr/lib/qt5/bin/uic
+		/usr/lib/qt5/bin/uic \
+		../QScintilla_src-2.13.3/src/Qsci/qsciscintilla.h \
+		../QScintilla_src-2.13.3/src/Qsci/qsciglobal.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscicommand.h \
+		../QScintilla_src-2.13.3/src/Qsci/qsciscintillabase.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscidocument.h
 	/usr/lib/qt5/bin/uic mainwindow.ui -o ui_mainwindow.h
 
 compiler_yacc_decl_make_all:
@@ -420,11 +434,31 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
-main.o: main.cpp mainwindow.h
+main.o: main.cpp mainwindow.h \
+		../QScintilla_src-2.13.3/src/Qsci/qsciscintilla.h \
+		../QScintilla_src-2.13.3/src/Qsci/qsciglobal.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscicommand.h \
+		../QScintilla_src-2.13.3/src/Qsci/qsciscintillabase.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscidocument.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscilexer.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscilexercustom.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscistyle.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscistyledtext.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
+		../QScintilla_src-2.13.3/src/Qsci/qsciscintilla.h \
+		../QScintilla_src-2.13.3/src/Qsci/qsciglobal.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscicommand.h \
+		../QScintilla_src-2.13.3/src/Qsci/qsciscintillabase.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscidocument.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscilexer.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscilexercustom.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscistyle.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscistyledtext.h \
 		ui_mainwindow.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscilexerjavascript.h \
+		../QScintilla_src-2.13.3/src/Qsci/qscilexercpp.h \
 		js_object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 

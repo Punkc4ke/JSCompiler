@@ -32,12 +32,12 @@ struct qt_meta_stringdata_Js_Object_t {
 static const qt_meta_stringdata_Js_Object_t qt_meta_stringdata_Js_Object = {
     {
 QT_MOC_LITERAL(0, 0, 9), // "Js_Object"
-QT_MOC_LITERAL(1, 10, 4), // "plus"
+QT_MOC_LITERAL(1, 10, 4), // "summ"
 QT_MOC_LITERAL(2, 15, 0), // ""
 QT_MOC_LITERAL(3, 16, 1) // "a"
 
     },
-    "Js_Object\0plus\0\0a"
+    "Js_Object\0summ\0\0a"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,7 +69,7 @@ void Js_Object::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         auto *_t = static_cast<Js_Object *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: { QString _r = _t->plus((*reinterpret_cast< QString(*)>(_a[1])));
+        case 0: { QString _r = _t->summ((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }

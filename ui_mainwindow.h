@@ -18,6 +18,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
+#include "Qsci/qsciscintilla.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -26,7 +27,6 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QPushButton *execPushButton;
-    QPlainTextEdit *javaScriptTextEdit;
     QPlainTextEdit *resultTextEdit;
     QPushButton *openButton;
     QPushButton *saveButton;
@@ -34,6 +34,7 @@ public:
     QPushButton *saveResultButton;
     QLabel *label_2;
     QPushButton *saveHowButton;
+    QsciScintilla *textEdit1;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -41,15 +42,13 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(802, 592);
+        MainWindow->resize(807, 592);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
+        centralwidget->setEnabled(true);
         execPushButton = new QPushButton(centralwidget);
         execPushButton->setObjectName(QString::fromUtf8("execPushButton"));
         execPushButton->setGeometry(QRect(10, 520, 771, 25));
-        javaScriptTextEdit = new QPlainTextEdit(centralwidget);
-        javaScriptTextEdit->setObjectName(QString::fromUtf8("javaScriptTextEdit"));
-        javaScriptTextEdit->setGeometry(QRect(10, 70, 771, 281));
         resultTextEdit = new QPlainTextEdit(centralwidget);
         resultTextEdit->setObjectName(QString::fromUtf8("resultTextEdit"));
         resultTextEdit->setGeometry(QRect(10, 380, 771, 131));
@@ -71,10 +70,15 @@ public:
         saveHowButton = new QPushButton(centralwidget);
         saveHowButton->setObjectName(QString::fromUtf8("saveHowButton"));
         saveHowButton->setGeometry(QRect(110, 10, 121, 25));
+        textEdit1 = new QsciScintilla(centralwidget);
+        textEdit1->setObjectName(QString::fromUtf8("textEdit1"));
+        textEdit1->setEnabled(true);
+        textEdit1->setGeometry(QRect(10, 70, 771, 281));
+        textEdit1->setFrameShadow(QFrame::Sunken);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 802, 22));
+        menubar->setGeometry(QRect(0, 0, 807, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -95,6 +99,12 @@ public:
         saveResultButton->setText(QApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214 \321\200\320\265\320\267\321\203\320\273\321\214\321\202\320\260\321\202", nullptr));
         label_2->setText(QApplication::translate("MainWindow", "\320\240\320\265\320\267\321\203\320\273\321\214\321\202\320\260\321\202:", nullptr));
         saveHowButton->setText(QApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214 \320\272\320\260\320\272", nullptr));
+#ifndef QT_NO_TOOLTIP
+        textEdit1->setToolTip(QString());
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_WHATSTHIS
+        textEdit1->setWhatsThis(QString());
+#endif // QT_NO_WHATSTHIS
     } // retranslateUi
 
 };
