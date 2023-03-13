@@ -18,14 +18,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    clonedialog.cpp \
+    gitgui.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    clonedialog.h \
+    gitgui.h \
     js_object.h \
     mainwindow.h
 
 FORMS += \
+    clonedialog.ui \
+    gitgui.ui \
     mainwindow.ui
 
 # Default rules for deployment.
@@ -35,12 +41,22 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES +=
 
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/QScintilla_src-2.13.3/src/release/ -lqscintilla2_qt5
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/QScintilla_src-2.13.3/src/debug/ -lqscintilla2_qt5
+else:unix: LIBS += -L$$PWD/QScintilla_src-2.13.3/src/ -lqscintilla2_qt5
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../QScintilla_src-2.13.3/src/release/ -lqscintilla2_qt5
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../QScintilla_src-2.13.3/src/debug/ -lqscintilla2_qt5
-else:unix: LIBS += -L$$PWD/../QScintilla_src-2.13.3/src/ -lqscintilla2_qt5
-
-INCLUDEPATH += $$PWD/../QScintilla_src-2.13.3/src
-DEPENDPATH += $$PWD/../QScintilla_src-2.13.3/src
+INCLUDEPATH += $$PWD/QScintilla_src-2.13.3/src
+DEPENDPATH += $$PWD/QScintilla_src-2.13.3/src
 
 LIBS += -lqscintilla2_qt5
+
+
+
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libgit2-1.5.2/build/release/ -lgit2
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libgit2-1.5.2/build/debug/ -lgit2
+else:unix: LIBS += -L$$PWD/libgit2-1.5.2/build/ -lgit2
+
+INCLUDEPATH += $$PWD/libgit2-1.5.2/build
+DEPENDPATH += $$PWD/libgit2-1.5.2/build

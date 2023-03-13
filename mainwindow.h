@@ -7,11 +7,11 @@
 #include <QFileSystemModel>
 #include <QFileDialog>
 #include <QtGui>
+
 #include <Qsci/qsciscintilla.h>
-#include <Qsci/qscilexer.h>
-#include <Qsci/qscilexercustom.h>
-#include <Qsci/qscistyle.h>
-#include <Qsci/qscistyledtext.h>
+
+#include <gitgui.h>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -37,8 +37,11 @@ private slots:
 
     void on_saveHowButton_clicked();
 
+    void on_repoButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+    GitGui gitgui;
     QJSEngine engine;
 };
 
