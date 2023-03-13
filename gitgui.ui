@@ -18,8 +18,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>871</width>
-     <height>611</height>
+     <width>792</width>
+     <height>581</height>
     </rect>
    </property>
    <widget class="QPushButton" name="cloneButton">
@@ -71,6 +71,16 @@
      </rect>
     </property>
    </widget>
+  </widget>
+  <widget class="QWidget" name="widget_2" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>792</width>
+     <height>581</height>
+    </rect>
+   </property>
   </widget>
  </widget>
  <resources/>

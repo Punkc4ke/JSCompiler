@@ -14,8 +14,8 @@ GitGui::GitGui(QWidget *parent) :
     ui(new Ui::GitGui)
 {
     ui->setupUi(this);
-    ui->listWidget->addItem("Line1");
-    ui->listWidget->addItem("Line1\nLine2");
+//    ui->listWidget->addItem("Line1");
+//    ui->listWidget->addItem("Line1\nLine2");
 }
 
 GitGui::~GitGui()
@@ -47,13 +47,21 @@ void GitGui::on_addButton_clicked()
 
     const git_signature *author = git_commit_author(commit);
 
+    int error_br = 0;
+        const char *branch = NULL;
+        git_reference *head = NULL;
+
+        error_br = git_repository_head(&head, repo);
+
+        branch = git_reference_shorthand(head);
+
 //    const char *message = git_commit_message(commit);
 //    const char *repo_path = git_repository_path(repo);
 //    const char *summmary = git_commit_summary(commit);
 //    const char *encoding = git_commit_message_encoding(commit);
 
 
-    ui->listWidget->addItem(dir+"\n"+path+"lol");
+    ui->listWidget->addItem(dir+"\n"+branch+" в "+path);
 
     git_libgit2_shutdown();
 }
