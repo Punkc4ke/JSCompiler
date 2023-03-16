@@ -16,13 +16,14 @@ public:
     explicit GitGui(QWidget *parent = nullptr);
     ~GitGui();
 
-
 private slots:
     void on_addButton_clicked();
 
     void on_cloneButton_clicked();
 
     void on_deleteButton_clicked();
+
+    void on_searchButton_clicked();
 
 private:
     Ui::GitGui *ui;

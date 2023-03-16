@@ -2,10 +2,7 @@
 #include "ui_clonedialog.h"
 
 #include <qgit2.h>
-#include <qgit2/libqgit2_export.h>
-#include <QFile>
 #include <QMessageBox>
-#include <QDebug>
 #include <QFileDialog>
 
 CloneDialog::CloneDialog(QWidget *parent) :
@@ -20,7 +17,6 @@ CloneDialog::~CloneDialog()
     delete ui;
 }
 
-
 void CloneDialog::on_browseButton_clicked()
 {
     QFileDialog dialog(this);
@@ -29,13 +25,10 @@ void CloneDialog::on_browseButton_clicked()
     ui->localDirEdit->setText(dir);
 }
 
-
 void CloneDialog::on_cloneButton_clicked()
 {
-
     QString url = ui->urlEdit->text();
-    if ((url == NULL) && (url == "") && (ui->urlEdit->text() == NULL))
-    {
+    if ((url == NULL) && (url == "") && (ui->urlEdit->text() == NULL)){
         QMessageBox urlBox;
         urlBox.setText("Введите URL удаленного репозитория.");
         urlBox.exec();
@@ -46,8 +39,7 @@ void CloneDialog::on_cloneButton_clicked()
 
     QString local_path = ui->localDirEdit->text();
 
-    if ((local_path == NULL) && (local_path == "") && (ui->localDirEdit->text() == NULL))
-    {
+    if ((local_path == NULL) && (local_path == "") && (ui->localDirEdit->text() == NULL)){
         QMessageBox local_pathBox;
         local_pathBox.setText("Укажите локальную папку.");
         local_pathBox.exec();
@@ -65,12 +57,9 @@ void CloneDialog::on_cloneButton_clicked()
 
     int error_code = git_clone(&repo, urlb, local_pathb, NULL);
 
-    qDebug()<<error_code;
-
     git_libgit2_shutdown();
 
-    if (error_code != 0)
-    {
+    if (error_code != 0) {
         QMessageBox errorBox;
         errorBox.setText("Ошибка клонирования репозитория.");
         errorBox.exec();

@@ -8,10 +8,8 @@ class Js_Object : public QObject
     Q_OBJECT
 public:
     explicit Js_Object(QObject *parent = 0) : QObject(parent) {
-//        qDebug()<<"Js_Object::Js_Object(QObject *parent) : QObject(parent)";
     }
     Q_INVOKABLE QString summ(QString a) {
-//        qDebug() << "summ called";
             QCryptographicHash hash(QCryptographicHash::Md5);{
 
             QFile file(a);
@@ -26,10 +24,8 @@ public:
             hash.addData(ios);
             data = hash.result().toHex().data();
             a = QString(data);
-//            qDebug()<<data;
-//            qDebug()<<0;
         }
-            return a;
+        return a;
     }
 };
 

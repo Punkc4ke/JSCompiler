@@ -52,8 +52,6 @@ LIBS += -lqscintilla2_qt5
 
 
 
-
-
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libgit2-1.5.2/build/release/ -lgit2
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libgit2-1.5.2/build/debug/ -lgit2
 else:unix: LIBS += -L$$PWD/libgit2-1.5.2/build/ -lgit2
