@@ -1,5 +1,4 @@
 #include <QObject>
-#include <QDebug>
 #include <QFile>
 #include <QCryptographicHash>
 
@@ -14,9 +13,10 @@ public:
 
             QFile file(a);
             QByteArray data;
+
             if(!file.open(QIODevice::ReadOnly)){
-                             a = "Ошибка чтения файла";
-                             return a;
+                a = "Ошибка чтения файла";
+                return a;
             }
             QByteArray ios = file.readAll();
             file.close();

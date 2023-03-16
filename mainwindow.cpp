@@ -4,7 +4,6 @@
 #include <QJSEngine>
 #include <QScriptContext>
 #include <QScriptValue>
-#include <QDebug>
 #include <QFile>
 #include <QtGui>
 #include <QColor>
@@ -15,7 +14,6 @@
 #include <js_object.h>
 
 #include <qgit2.h>
-
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

@@ -13,8 +13,7 @@ GitGui::GitGui(QWidget *parent) :
     ui(new Ui::GitGui)
 {
     ui->setupUi(this);
-    ui->listWidget->addItem("LOL");
-    ui->listWidget->addItem("TEST");
+    ui->deleteButton->setEnabled(false);
 }
 
 GitGui::~GitGui()
@@ -118,7 +117,6 @@ void GitGui::on_addButton_clicked()
     }
 }
 
-
 void GitGui::on_cloneButton_clicked()
 {
     clonedialog.setFixedSize(630, 130);
@@ -157,3 +155,12 @@ void GitGui::on_searchButton_clicked()
     }
 }
 
+void GitGui::on_listWidget_currentRowChanged(int currentRow)
+{
+    if(currentRow >= 0){
+        ui->deleteButton->setEnabled(true);
+    }
+    else{
+        ui->deleteButton->setEnabled(false);
+    }
+}

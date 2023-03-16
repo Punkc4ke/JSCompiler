@@ -25,6 +25,8 @@ private slots:
 
     void on_searchButton_clicked();
 
+    void on_listWidget_currentRowChanged(int currentRow);
+
 private:
     Ui::GitGui *ui;
     CloneDialog clonedialog;

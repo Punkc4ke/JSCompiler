@@ -74,4 +74,3 @@ void CloneDialog::on_cloneButton_clicked()
         close();
     }
 }
-
