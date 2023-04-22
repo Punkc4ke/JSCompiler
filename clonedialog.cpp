@@ -20,7 +20,6 @@ CloneDialog::~CloneDialog()
     delete ui;
 }
 
-
 void CloneDialog::on_browseButton_clicked()
 {
     QFileDialog dialog(this);
@@ -28,7 +27,6 @@ void CloneDialog::on_browseButton_clicked()
     QString dir = dialog.getExistingDirectory(this, "Выберите локальную папку", "/home/");
     ui->localDirEdit->setText(dir);
 }
-
 
 void CloneDialog::on_cloneButton_clicked()
 {
@@ -64,8 +62,6 @@ void CloneDialog::on_cloneButton_clicked()
     dir.removeRecursively();
 
     int error_code = git_clone(&repo, urlb, local_pathb, NULL);
-
-    qDebug()<<error_code;
 
     git_libgit2_shutdown();
 

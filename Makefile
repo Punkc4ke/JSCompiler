@@ -279,6 +279,7 @@ DIST          = ../../Qt/5.15.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.15.2/gcc_64/mkspecs/features/yacc.prf \
 		../../Qt/5.15.2/gcc_64/mkspecs/features/lex.prf \
 		JavaScriptCompiler.pro clonedialog.h \
+		commit.h \
 		gitgui.h \
 		js_object.h \
 		mainwindow.h clonedialog.cpp \
@@ -736,7 +737,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Qt/5.15.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents clonedialog.h gitgui.h js_object.h mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents clonedialog.h commit.h gitgui.h js_object.h mainwindow.h $(DISTDIR)/
 	$(COPY_FILE) --parents clonedialog.cpp gitgui.cpp main.cpp mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents clonedialog.ui gitgui.ui mainwindow.ui $(DISTDIR)/
 
@@ -989,6 +990,26 @@ moc_gitgui.cpp: gitgui.h \
 		clonedialog.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QDialog \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qdialog.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QListWidgetItem \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qlistwidget.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qlistview.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.15.2/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.15.2/gcc_64/include/QtGui/qicon.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qrubberband.h \
 		moc_predefs.h \
 		../../Qt/5.15.2/gcc_64/bin/moc
 	/home/alexey/Qt/5.15.2/gcc_64/bin/moc $(DEFINES) --include /home/alexey/QtProjects/JSCompiler/moc_predefs.h -I/home/alexey/Qt/5.15.2/gcc_64/mkspecs/linux-g++ -I/home/alexey/QtProjects/JSCompiler -I/home/alexey/QtProjects/JSCompiler/QScintilla_src-2.13.3/src -I/home/alexey/QtProjects/JSCompiler/libgit2-1.5.2/build -I/home/alexey/Qt/5.15.2/gcc_64/include -I/home/alexey/Qt/5.15.2/gcc_64/include/QtWidgets -I/home/alexey/Qt/5.15.2/gcc_64/include/QtGui -I/home/alexey/Qt/5.15.2/gcc_64/include/QtScript -I/home/alexey/Qt/5.15.2/gcc_64/include/QtQml -I/home/alexey/Qt/5.15.2/gcc_64/include/QtNetwork -I/home/alexey/Qt/5.15.2/gcc_64/include/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include gitgui.h -o moc_gitgui.cpp
@@ -1436,6 +1457,18 @@ moc_mainwindow.cpp: mainwindow.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QWidget \
 		clonedialog.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QDialog \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QListWidgetItem \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qlistwidget.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qlistview.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qrubberband.h \
 		moc_predefs.h \
 		../../Qt/5.15.2/gcc_64/bin/moc
 	/home/alexey/Qt/5.15.2/gcc_64/bin/moc $(DEFINES) --include /home/alexey/QtProjects/JSCompiler/moc_predefs.h -I/home/alexey/Qt/5.15.2/gcc_64/mkspecs/linux-g++ -I/home/alexey/QtProjects/JSCompiler -I/home/alexey/QtProjects/JSCompiler/QScintilla_src-2.13.3/src -I/home/alexey/QtProjects/JSCompiler/libgit2-1.5.2/build -I/home/alexey/Qt/5.15.2/gcc_64/include -I/home/alexey/Qt/5.15.2/gcc_64/include/QtWidgets -I/home/alexey/Qt/5.15.2/gcc_64/include/QtGui -I/home/alexey/Qt/5.15.2/gcc_64/include/QtScript -I/home/alexey/Qt/5.15.2/gcc_64/include/QtQml -I/home/alexey/Qt/5.15.2/gcc_64/include/QtNetwork -I/home/alexey/Qt/5.15.2/gcc_64/include/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
@@ -1835,16 +1868,7 @@ gitgui.o: gitgui.cpp gitgui.h \
 		clonedialog.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QDialog \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qdialog.h \
-		ui_gitgui.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/QVariant \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/qapplication.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qcoreapplication.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qeventloop.h \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qguiapplication.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qinputmethod.h \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/QListWidget \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QListWidgetItem \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qlistwidget.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qlistview.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractitemview.h \
@@ -1864,16 +1888,36 @@ gitgui.o: gitgui.cpp gitgui.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabbar.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qrubberband.h \
+		ui_gitgui.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.15.2/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.15.2/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qlabel.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QListWidget \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QPushButton \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		libqgit2/qgit2.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QFileDialog \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qfiledialog.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qdir.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qfileinfo.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QMessageBox \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qmessagebox.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/QDebug
+		../../Qt/5.15.2/gcc_64/include/QtCore/QDebug \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QMenu \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qmenu.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qaction.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/QVector \
+		commit.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/QString
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gitgui.o gitgui.cpp
 
 main.o: main.cpp mainwindow.h \
@@ -2243,6 +2287,18 @@ main.o: main.cpp mainwindow.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QWidget \
 		clonedialog.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QDialog \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QListWidgetItem \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qlistwidget.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qlistview.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qrubberband.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qapplication.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qdesktopwidget.h
@@ -2615,6 +2671,18 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QWidget \
 		clonedialog.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QDialog \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QListWidgetItem \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qlistwidget.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qlistview.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qrubberband.h \
 		ui_mainwindow.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/QVariant \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \

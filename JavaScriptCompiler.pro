@@ -25,6 +25,7 @@ SOURCES += \
 
 HEADERS += \
     clonedialog.h \
+    commit.h \
     gitgui.h \
     js_object.h \
     mainwindow.h

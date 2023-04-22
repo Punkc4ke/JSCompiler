@@ -12,7 +12,6 @@
 
 #include <gitgui.h>
 
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -24,7 +23,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
 
 private slots:
     void on_execPushButton_clicked();
@@ -41,8 +39,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    GitGui gitgui;
     QJSEngine engine;
+    GitGui gitgui;
 };
 
 #endif // MAINWINDOW_H

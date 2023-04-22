@@ -13,6 +13,7 @@
 #include <Qsci/qscilexerjavascript.h>
 
 #include <js_object.h>
+#include <gitgui.h>
 
 #include <qgit2.h>
 #include <qgit2/libqgit2_export.h>
@@ -24,15 +25,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    connect(ui->execPushButton, &QPushButton::clicked, this, &MainWindow::on_execPushButton_clicked);
-    connect(ui->saveButton, &QPushButton::clicked, this, &MainWindow::on_saveButton_clicked);
-//    connect(ui->openButton_1, &QPushButton::clicked, this, &MainWindow::on_repoButton_clicked);
 
+//    connect(ui->execPushButton, &QPushButton::clicked, this, &MainWindow::on_execPushButton_clicked);
+//    connect(ui->saveButton, &QPushButton::clicked, this, &MainWindow::on_saveButton_clicked);
 
     ui->textEdit1->setUtf8(true);// мы же хотим читать кириллицу
     QsciLexerJavaScript * lexJS = new QsciLexerJavaScript(this);// создаем лексер (схему подсветки)
     ui->textEdit1->setLexer(lexJS); // задаем С++ лексер нашему редактору
-
 
     //! Текущая строка кода и ее подсветка
     ui->textEdit1->setCaretLineVisible(true);
@@ -60,22 +59,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->textEdit1->setBraceMatching(QsciScintilla::SloppyBraceMatch);
     ui->textEdit1->setMatchedBraceBackgroundColor(Qt::green);
     ui->textEdit1->setUnmatchedBraceForegroundColor(Qt::blue);
-
-
-//    git_libgit2_init();
-//    git_repository *repo;
-
-
-//    int error_code = git_repository_init(&repo, "/home/alexey/TestRepo", false);
-//    qDebug()<<error_code;
-
-//    git_libgit2_shutdown();
-
 }
 
 MainWindow::~MainWindow()
 {
-        delete ui;
+    delete ui;
 }
 
 void MainWindow::on_execPushButton_clicked()
@@ -116,31 +104,30 @@ void MainWindow::on_openButton_clicked()
 
 void MainWindow::on_saveButton_clicked()
 {
-     QString  scriptCode = ui->textEdit1->text();
-     QString str = ui->label->text();
+    QString  scriptCode = ui->textEdit1->text();
+    QString str = ui->label->text();
 
-     QFile file(str);
-     if(file.exists()==false){
+    QFile file(str);
+    if(file.exists()==false){
          str = "";
          ui->label->setText(str);
          return;
-     }
-     if (scriptCode.isNull()){
-         return;
-     }
-     if (str.isNull()){
-         return;
-     }
+    }
+    if (scriptCode.isNull()){
+       return;
+    }
+    if (str.isNull()){
+        return;
+    }
 
-     file.open(QIODevice::ReadWrite|QIODevice::Text);
+    file.open(QIODevice::ReadWrite|QIODevice::Text);
 
-     file.seek(0);
-     QString text = ui->textEdit1->text();
-     QByteArray text1 = text.toUtf8();
-     file.write(text1);
+    file.seek(0);
+    QString text = ui->textEdit1->text();
+    QByteArray text1 = text.toUtf8();
+    file.write(text1);
 
-     file.close();
-
+    file.close();
 }
 
 void MainWindow::on_saveResultButton_clicked()
@@ -155,7 +142,6 @@ void MainWindow::on_saveResultButton_clicked()
     file.write(text1);
 
     file.close();
-
 }
 
 void MainWindow::on_saveHowButton_clicked()
@@ -176,7 +162,6 @@ void MainWindow::on_saveHowButton_clicked()
        file.close();
 
        ui->label->setText(fileName);
-
     }
 }
 
@@ -208,18 +193,14 @@ QColor QsciLexerJavaScript::defaultColor(int style) const
             return QColor(224, 207, 177);
         case DoubleQuotedString:
            return QColor(119, 221, 119);
-
-
     }
     return Qt::black;
 }
-
-
-
 
 void MainWindow::on_repoButton_clicked()
 {
     gitgui.move(950, 80);
     gitgui.show();
 }
+
 
